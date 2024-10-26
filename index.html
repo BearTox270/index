@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid al-Adha Countdown</title>
+    <style type="text/css">
+        body{
+            background-image: url('file:///C:/Users/youibr_marrmar/Desktop/Eid%20aladhu/cow.jpg');
+            background-size: cover;
+        }
+
+    
+        .countdown-container {
+            text-align: center;
+            position: relative;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffdd57;
+            font-weight: bold;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ffdd57, 0 0 20px #ffdd57, 0 0 30px #ffdd57;
+            }
+            to {
+                text-shadow: 0 0 20px #ff7d00, 0 0 30px #ff7d00, 0 0 40px #ff7d00;
+            }
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+        }
+
+        .time-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5em;
+            padding: 20px;
+            border: 2px solid #ffdd57;
+            border-radius: 10px;
+            background: rgba(255, 221, 87, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .number {
+            font-size: 3em;
+            color: #ff7d00;
+        }
+
+        .time-section:hover {
+            transform: scale(1.1);
+            background: rgba(255, 221, 87, 0.2);
+            border-color: #ff7d00;
+        }
+
+        .share-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ffdd57;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background 0.3s;
+        }
+
+        .share-button:hover {
+            background: #ff7d00;
+            color: #fff;
+        }
+
+        .copy-message {
+            margin-top: 10px;
+            display: none; /* Hidden by default */
+            font-size: 1em;
+            color: #00ff00; /* Green color for success message */
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1 class="title">Eid al-Adha 2025 Countdown</h1>
+        <div class="countdown" id="countdown">
+            <div class="time-section">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-section">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-section">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="time-section">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+        <button class="share-button" id="shareBtn">Copy Link</button>
+        <div class="copy-message" id="copyMessage">Link copied!</div>
+    </div>
+
+    <script>
+        const countdown = () => {
+            const eidDate = new Date('2025-06-29T00:00:00').getTime(); // Updated to 2025
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = eidDate - now;
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+
+                if (timeLeft < 0) {
+                    clearInterval(interval);
+                    document.querySelector('.countdown').innerHTML = "<h2>Eid Mubarak!</h2>";
+                }
+            }, 1000);
+        };
+
+        const copyLink = () => {
+            const url = window.location.href; // Current page URL
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    const copyMessage = document.getElementById('copyMessage');
+                    copyMessage.style.display = 'block'; // Show the message
+                    setTimeout(() => {
+                        copyMessage.style.display = 'none'; // Hide after 2 seconds
+                    }, 2000);
+                })
+                .catch((error) => console.error('Error copying link:', error));
+        };
+
+        document.getElementById('shareBtn').addEventListener('click', copyLink);
+
+        countdown();
+    </script>
+</body>
+</html>
