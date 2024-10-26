@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eid al-Adha Countdown</title>
     <style type="text/css">
-body {
-    background-image: url('https://github.com/BearTox270/index/blob/main/cow.jpg');
-    background-size: cover;
-}
+        body {
+            background-image: url('https://github.com/BearTox270/index/blob/main/cow.jpg'); /* Ensure this URL is correct and publicly accessible */
+            background-size: cover;
+        } 
 
-
-    
         .countdown-container {
             text-align: center;
             position: relative;
@@ -118,7 +116,7 @@ body {
 
     <script>
         const countdown = () => {
-            const eidDate = new Date('2025-06-29T00:00:00').getTime(); // Updated to 2025
+            const eidDate = new Date('2025-06-06T00:00:00').getTime(); // Corrected date for Eid al-Adha 2025
 
             const interval = setInterval(() => {
                 const now = new Date().getTime();
